@@ -1,18 +1,31 @@
-const form = document.querySelector("form");
+// SCREAMING_SNAKE_CASE as this is a constant configuration value.
+const REQUIRED = ["name", "email", "message"];
 
-// Same pattern as 'clicks', but for 'submit' events.
+const form = document.querySelector("form");
+const result = document.querySelector("#result");
+
+// CSS attribute selector.
+const submitBtn = form.querySelector('[type="submit"]');
+
+submitBtn.disabled = true; // Start disabled
+
+form.addEventListener("input", () => {
+  // Does EVERY form input field have a non-empty value?
+  REQUIRED.every((field) => form[field].value.trim() !== "")
+    ? (submitBtn.disabled = false) // If yes, enable button
+    : (submitBtn.disabled = true); // If no, disable button
+});
+
 form.addEventListener("submit", (event) => {
-  // No, browser! WE will handle this. Stop your default behavior.
   event.preventDefault();
   const formData = new FormData(form);
   const data = Object.fromEntries(formData);
 
-  console.log(data);
+  // Pass the data object to the Results function to get HTML! 🚀
+  result.innerHTML = Results(data);
 });
 
 function Results(data) {
-  console.log(Object.entries(data));
-
   return `<ul class="space-y-1 text-sm">
         ${Object.entries(data)
           .map(([k, v]) => `<li><strong>${k}:</strong> ${v}</li>`)
