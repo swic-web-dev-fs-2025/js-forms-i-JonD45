@@ -1,3 +1,4 @@
+import "./style.css";
 // SCREAMING_SNAKE_CASE as this is a constant configuration value.
 const REQUIRED = ["name", "email", "password", "confirm-password"];
 
@@ -25,9 +26,8 @@ form.addEventListener("submit", (event) => {
   if (data.password !== data["confirm-password"]) {
     form.querySelector("output").textContent = "Passwords do not match.";
     return;
-  } else {
-    form.querySelector("output").textContent = "";
   }
+  form.querySelector("output").textContent = "";
 
   result.innerHTML = Results(data);
 });

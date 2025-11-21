@@ -1,1 +1,18 @@
 @import "tailwindcss";
+.form > * {
+  border: 2px solid rgb(251, 10, 199);
+  border-radius: 5px;
+  background-color: rgb(29, 206, 255);
+}
+
+.form > *:hover {
+  border: 2px dotted rgb(249, 17, 17);
+  display: flex;
+  justify-content: flex-start;
+}
+.form > *:hover {
+  background-color: rgb(255, 248, 29);
+}
+.form > *:focus {
+  background-color: rgb(29, 255, 34);
+}
