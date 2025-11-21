@@ -1,5 +1,5 @@
 // SCREAMING_SNAKE_CASE as this is a constant configuration value.
-const REQUIRED = ["name", "email", "message"];
+const REQUIRED = ["name", "email", "password", "confirm-password"];
 
 const form = document.querySelector("form");
 const result = document.querySelector("#result");
@@ -21,7 +21,14 @@ form.addEventListener("submit", (event) => {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData);
 
-  // Pass the data object to the Results function to get HTML! 🚀
+  // display error if passwords do not match
+  if (data.password !== data["confirm-password"]) {
+    form.querySelector("output").textContent = "Passwords do not match.";
+    return;
+  } else {
+    form.querySelector("output").textContent = "";
+  }
+
   result.innerHTML = Results(data);
 });
 
